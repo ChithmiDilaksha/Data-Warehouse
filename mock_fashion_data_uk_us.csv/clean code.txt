@@ -1,0 +1,77 @@
+import pandas as pd
+
+print(f"Pansad version:{pd.__version__}")
+
+df=pd.read_csv('mock_fashion_data.csv')
+df.head()
+
+data_cleaned=df.dropna()
+
+data_cleaned=data_cleaned.drop_duplicates()
+
+
+
+if 'Age' in data_cleaned.columns:
+    data_cleaned = data_cleaned[data_cleaned['Age'] > 0]
+else:
+    print("Column 'Age' not found in the DataFrame. Check your data or previous steps.")
+    possible_columns = [col for col in data_cleaned.columns if 'Age' in col.lower()]
+    if possible_columns:
+        print(f"Possible columns with 'Age': {', '.join(possible_columns)}")
+    else:
+        print("No columns with 'Age' found.")
+
+
+
+row_count = len(df)
+print(f"Number of rows in the DataFrame: {row_count} rows")
+
+
+
+
+import pandas as pd
+
+# File paths
+input_file = "mock_fashion_data.csv"  # Replace with the input file name
+output_file = "cleaned_dataset.csv"  # Replace with the output file name
+
+# Read the CSV file
+df = pd.read_csv(input_file)
+
+# Remove the last 100,000 rows
+cleaned_df = df.iloc[:-400000]  # Keep all rows except the last 100,000
+
+# Save the cleaned DataFrame back to a CSV file
+cleaned_df.to_csv(output_file, index=False)
+
+print(f"Cleaned CSV file saved as {output_file}")
+
+
+
+
+
+
+import pandas as pd
+
+# Load the cleaned dataset
+cleaned_file = "cleaned_dataset.csv"  # Replace with your cleaned file name
+
+# Read the cleaned CSV file
+cleaned_df = pd.read_csv(cleaned_file)
+
+# Get the number of rows
+row_count = cleaned_df.shape[0]
+
+print(f"The cleaned dataset has {row_count} rows.")
+
+
+
+
+
+
+
+
+from google.colab import files
+df.to_csv('cleaned_dataset.csv', index=False)
+files.download('cleaned_dataset.csv')
+
